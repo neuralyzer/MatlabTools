@@ -17,7 +17,7 @@ classdef RegularExpressionIterator < FolderIterator
                 pause(obj.sleep_time);
                 obj.dir_listing = dir(fullfile(obj.folder, obj.reg_exp));
             end
-            obj.current_item = obj.dir_listing(obj.counter).name;
+            obj.current_item = fullfile(obj.folder, obj.dir_listing(obj.counter).name);
         end
     end
     
