@@ -9,7 +9,7 @@ classdef NumberedFileAndFoldersIterator < FolderIterator
     properties
         start_value;
         increment;
-        number_format;
+        number_formatter;
     end
 
     methods (Access = private)
@@ -23,16 +23,16 @@ classdef NumberedFileAndFoldersIterator < FolderIterator
             end
         end
         function make_path_from_counter(obj)
-            obj.current_item = fullfile(obj.folder, sprintf(obj.number_format, obj.counter));
+            obj.current_item = fullfile(obj.folder, obj.number_formatter(obj.counter));
         end
     end
     methods
         function obj = NumberedFileAndFoldersIterator(folder, sleep_time, start_value,...
-                                          increment, end_value, number_format)
+                                          increment, end_value, number_formatter)
 
             obj@FolderIterator(folder, sleep_time, end_value)
             obj.start_value = start_value;
-            obj.number_format = number_format;
+            obj.number_formatter = number_formatter;
             obj.increment = increment;
         end
         function first(obj)
